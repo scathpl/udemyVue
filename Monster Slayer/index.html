@@ -5,6 +5,14 @@
     <script src="https://npmcdn.com/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="css/foundation.min.css" />
     <link rel="stylesheet" href="css/app.css" />
+    <style>
+      .fade-enter {
+        opacity: 0;
+      }
+      .fade-enter-active {
+        transform: opacity 0.3s;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -56,12 +64,15 @@
       <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
           <ul>
-            <li
-              v-for="log in turns"
-              :class="{'player-turn': log.isPlayer, 'monster-turn': !log.isPlayer}"
-            >
-              {{log.text}}
-            </li>
+            <transition-group name="fade">
+              <li
+                v-for="log in turns"
+                :class="{'player-turn': log.isPlayer, 'monster-turn': !log.isPlayer}"
+                :key="log.id"
+              >
+                {{log.text}}
+              </li>
+            </transition-group>
           </ul>
         </div>
       </section>

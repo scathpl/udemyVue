@@ -5,6 +5,7 @@ new Vue({
     opponentHP: 100,
     gameIsRunning: false,
     turns: [],
+    currTurn: 0,
   },
   methods: {
     startGame() {
@@ -20,7 +21,9 @@ new Vue({
       this.turns.unshift({
         isPlayer: true,
         text: "Player hits Monster for " + dmg,
+        id: this.currTurn + 1,
       });
+      this.currTurn++;
       if (this.checkWin()) {
         return;
       }
@@ -33,7 +36,9 @@ new Vue({
       this.turns.unshift({
         isPlayer: true,
         text: "Player hits Monster hard for " + dmg,
+        id: this.currTurn + 1,
       });
+      this.currTurn++;
       if (this.checkWin()) {
         return;
       }
@@ -46,7 +51,9 @@ new Vue({
       this.turns.unshift({
         isPlayer: false,
         text: "Monster hits Player for " + dmg,
+        id: this.currTurn + 1,
       });
+      this.currTurn++;
     },
     heal() {
       if (this.playerHP <= 90) this.playerHP += 10;
@@ -54,7 +61,9 @@ new Vue({
       this.turns.unshift({
         isPlayer: true,
         text: "Player heals for 10",
+        id: this.currTurn + 1,
       });
+      this.currTurn++;
       this.monsterAttack();
     },
     giveUp() {
